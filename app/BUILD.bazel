@@ -1,0 +1,14 @@
+load("@rules_python//python:defs.bzl", "py_binary")
+load("//containers:containers.bzl", "container_app")
+
+py_binary(
+    name = "hello_world",
+    srcs = ["hello_world.py"],
+)
+
+container_app(
+    name = "hello_world",
+    app_target = ":hello_world",
+    base = "@distroless_static//image",
+    repository = "example.invalid/repo/helloworld",
+)
