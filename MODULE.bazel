@@ -1,0 +1,21 @@
+bazel_dep(name = "rules_python", version = "1.0.0")
+bazel_dep(name = "rules_pkg", version = "1.1.0")
+bazel_dep(name = "rules_oci", version = "2.2.6")
+
+oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
+oci.pull(
+    name = "distroless_static",
+    image = "gcr.io/distroless/static-debian12",
+    platforms = ["linux/amd64"],
+    tag = "latest",
+)
+oci.pull(
+    name = "python312_slim",
+    image = "python",
+    platforms = ["linux/amd64"],
+    tag = "3.12-slim",
+)
+use_repo(oci, "distroless_static", "distroless_static_linux_amd64", "python312_slim", "python312_slim_linux_amd64")
+
+workspace_tag = use_extension("//workspace_tag:extensions.bzl", "workspace_tag_ext")
+use_repo(workspace_tag, "workspace_tag")
