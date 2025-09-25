@@ -1,0 +1,12 @@
+{
+  "files.exclude": {
+    ".home": true,
+    ".mypy_cache": true,
+    "bazel-*/": true
+  },
+  "search.exclude": {
+    ".home": true,
+    ".mypy_cache": true,
+    "bazel-*/": true
+  }
+}

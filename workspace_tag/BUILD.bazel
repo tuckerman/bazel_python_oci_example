@@ -1,0 +1,8 @@
+exports_files(["extensions.bzl"])
+
+py_binary(
+    name = "init",
+    srcs = ["init.py"],
+    main = "init.py",
+    python_version = "PY3",
+)

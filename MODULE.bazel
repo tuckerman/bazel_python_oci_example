@@ -9,7 +9,13 @@ oci.pull(
     platforms = ["linux/amd64"],
     tag = "latest",
 )
-use_repo(oci, "distroless_static", "distroless_static_linux_amd64")
+oci.pull(
+    name = "python312_slim",
+    image = "python",
+    platforms = ["linux/amd64"],
+    tag = "3.12-slim",
+)
+use_repo(oci, "distroless_static", "distroless_static_linux_amd64", "python312_slim", "python312_slim_linux_amd64")
 
-img = use_extension("//containers:extensions.bzl", "image_tag_ext")
-use_repo(img, "image_tag")
+workspace_tag = use_extension("//workspace_tag:extensions.bzl", "workspace_tag_ext")
+use_repo(workspace_tag, "workspace_tag")

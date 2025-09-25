@@ -1,0 +1,14 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary")
+load("//container_app:defs.bzl", "container_app")
+
+cc_binary(
+    name = "hello",
+    srcs = ["hello.cc"],
+)
+
+container_app(
+    name = "hello",
+    app_target = ":hello",
+    base = "@python312_slim//:python312_slim",
+    repository = "example.invalid/repo/hello_cc",
+)

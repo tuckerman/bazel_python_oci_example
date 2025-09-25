@@ -1,14 +1,20 @@
 load("@rules_python//python:defs.bzl", "py_binary")
-load("//containers:containers.bzl", "container_app")
+load("//container_app:defs.bzl", "container_app")
+
+py_library(
+    name = "hello_world_lib",
+    srcs = ["greeter.py"],
+)
 
 py_binary(
     name = "hello_world",
     srcs = ["hello_world.py"],
+    deps = [":hello_world_lib"],
 )
 
 container_app(
     name = "hello_world",
     app_target = ":hello_world",
-    base = "@distroless_static//image",
+    base = "@python312_slim//:python312_slim",
     repository = "example.invalid/repo/helloworld",
 )
